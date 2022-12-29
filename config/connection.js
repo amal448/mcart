@@ -5,7 +5,11 @@ const state = {
 }
 
 module.exports.connect=function(done) {
-    const url='mongodb://localhost:27017';
+    
+    // const url='mongodb://localhost:27017';
+    // const dbname='shopping'
+
+    const url='mongodb+srv://amal:brototype@cluster0.v5lp3rt.mongodb.net';
     const dbname='shopping'
 
     mongoClient.connect(url, (err, data) => {
