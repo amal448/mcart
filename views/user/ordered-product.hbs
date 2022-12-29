@@ -1,0 +1,102 @@
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+<!-- Css Styles -->
+<link rel="stylesheet" href="/head/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="/head/css/font-awesome.min.css" type="text/css">
+<link rel="stylesheet" href="/head/css/elegant-icons.css" type="text/css">
+<link rel="stylesheet" href="/head/css/jquery-ui.min.css" type="text/css">
+<link rel="stylesheet" href="/head/css/magnific-popup.css" type="text/css">
+<link rel="stylesheet" href="/head/css/owl.carousel.min.css" type="text/css">
+<link rel="stylesheet" href="/head/css/slicknav.min.css" type="text/css">
+<link rel="stylesheet" href="/head/css/style.css" type="text/css">
+
+
+<section class="product spad">
+       <div class="container">
+       
+     
+        
+      
+       <h2>Ordered Products</h2>
+        
+        <div class="row property__gallery">
+           
+            {{#each orderItems}}
+            
+            <div class="col-lg-3 col-md-4 col-sm-6 mix women">
+                <div class="product__item">
+                    <div class="product__item__pic set-bg" data-setbg=""><img src="/product-images/{{this.product._id}}.jpg" alt="not show">
+                        <div class="label new">New</div>
+                      
+
+                        <ul class="product__hover">
+                            <li><a href="/product-images/{{this.product._id}}.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
+                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>
+                            <li><a ><button onclick="addToCart('{{this._id}}')"><span class="icon_bag_alt"></span></button></a></li>
+                        </ul>
+                        </a>
+                    </div>
+                    <div class="product__item__text">
+                        <h6><a href="/product-view/{{this._id}}">{{this.product.Name}}</a></h6>
+                        <div class="rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                        <div class="product__price">{{this.product.price}}</div>
+                        <div class="product__price">Qty: {{this.quantity}}</div>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+         <table class="table">
+       
+                        <thead>
+                            <tr>
+                                <th scope="col">Shipping Address</th>
+                                <th scope="col">Total Amount</th>
+                                <th scope="col">Status</t>
+                                <th scope="col">Payment Method</t>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{!-- <p>{{orderList.deliveryDitails.homeaddress}}</p> --}}
+                            {{!-- {{orderList}} --}}
+                                
+                            <tr>
+                                <td>
+                                    {{orders.deliveryDetails.homeaddress}}<br>
+                                    {{orders.deliveryDetails.fullAddress}}<br>
+                                    {{orders.deliveryDetails.town}}<br>
+                                    {{orders.deliveryDetails.Country}}<br> 
+                                    {{!-- {{orderList.deliveryDitails.pincode}} --}}
+
+                                </td>
+                                <td>₹ {{orders.totalAmount}}</td>
+                                <td>  {{orders.status}}</td>
+                                <td>  {{orders.paymentMethod}}</td>
+                            </tr>
+                        
+                        </tbody>
+                    </table>
+                    
+    </div>
+</section>
+<script src="/head/js/jquery-3.3.1.min.js"></script>
+<script src="/head/js/bootstrap.min.js"></script>
+<script src="/head/js/jquery.magnific-popup.min.js"></script>
+<script src="/head/js/jquery-ui.min.js"></script>
+<script src="/head/js/mixitup.min.js"></script>
+<script src="/head/js/jquery.countdown.min.js"></script>
+<script src="/head/js/jquery.slicknav.js"></script>
+<script src="/head/js/owl.carousel.min.js"></script>
+<script src="/head/js/jquery.nicescroll.min.js"></script>
+<script src="/head/js/main.js"></script>
+
+

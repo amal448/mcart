@@ -1,0 +1,31 @@
+<div class="col-md-6 main">
+                      
+        
+
+
+                        <form action="/admin/add-user" method="post">
+             {{#if signupErr}}
+                   <p class="error">{{signupErr}}</p>
+            {{/if}}
+
+            <h1>Add Products</h1>
+                              
+            <input class="box" type="text" name="Name" id="name" 
+            placeholder="Name"  required /><br>
+                              
+            <input class="box" type="text" name="text" id="text" 
+            placeholder="Category " required /><br>
+                              
+            <input class="box" type="password" name="password" id="password" placeholder="Password " required /><br>
+                <br>
+                
+            <input class="box" type="text" name="phone" id="phone"  
+            placeholder="Phone Number " required/><br>
+                        <br>
+            <input type="submit" id="submitDetails"  
+            name="submitDetails" value="Submit" /><br>
+                      
+            </form>
+                      
+        </div>
+        

@@ -1,0 +1,203 @@
+
+<!-- Shop Cart Section Begin -->
+{{#if cartCount}}
+
+<section class="shop-cart spad">
+    <div class="container">
+       
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="shop__cart__table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>SubTotal</th>
+                                <th>Remove</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each products}}
+                            <tr>
+                              
+ 
+                                <td class="cart__product__item">
+                                    <img style="width:100px ; height: 100px;"
+                                        src="/product-images/{{this.product._id}}.jpg" alt="">
+                                    <div class="cart__product__item__title">
+                                        <h6>{{this.product.Name}}</h6>
+                                        <div class="rating">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                    </div>
+                                   
+
+                                </td>
+                                <td class="cart__price">{{this.product.price}}</td>
+                               
+                                
+                                <td class="cart__quantity">
+                                    <button class="btn btn-link px-2"
+                                        onclick="changeQuantity('{{this._id}}','{{this.product._id}}',-1)">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+
+                                    {{!-- <input id="{{this.product._id}}" name="quantity" value={{this.quantity}}
+                                        type="number" class="form-control form-control-sm" /> --}}
+                                    <span id="{{this.product._id}}" name="quantity">{{this.quantity}}</span>
+                                    
+                                    <button class="btn btn-link px-2"
+                                        onclick="changeQuantity('{{this._id}}','{{this.product._id}}',1)">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </td>
+                                <td class="cart__total" id="subtotals{{this.product._id}}">{{this.subtotals}}</td> 
+                                <a href="">
+                                <td class="cart__close"><button   onclick="removeCart('{{this.product._id}}')"><span class="icon_close"></span></button></td>
+                                </a>
+                                {{!-- <td class="cart__total"></td> --}}
+                              
+                                {{!-- <a href="/removefromcart">
+                                    <td class="cart__close"><button   onclick="deleteItem(event)"><span class="icon_close"></span></button></td>
+                                </a> --}}
+                                
+                            </tr>
+                            {{/each}}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="cart__btn">
+                    <a href="/">Continue Shopping</a>
+                </div>
+            </div>
+           
+        </div>
+        <div class="row">
+            
+            <div class="col-lg-4 offset-lg-8">
+                <div class="cart__total__procced">
+                    <h6>Cart total</h6>
+                    <ul>
+                         
+                        <li>Total <span id="total">{{total}}</span></li>
+                       
+                    </ul>
+                    <a href="/place-order" class="primary-btn">Proceed to checkout</a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</section>
+{{else}}
+<div class="container">
+    <img style="width:100% ;height:500px ;" src="https://bakestudio.in/assets/images/cart/empty-cart.gif" alt="">
+    <h1>CART EMPTY</h1>
+</div>
+{{/if}}
+<!-- Shop Cart Section End -->
+
+
+<script>
+  function changeQuantity(cartId,proId,count){
+    
+        let quantity = parseInt(document.getElementById(proId).innerHTML)
+        $.ajax({
+            url:'/change-product-quantity',
+            data:{
+                
+                cart:cartId,
+                product:proId,
+                count:count,
+                quantity:quantity
+            
+            },
+            method:'post',
+            success:(response)=>{
+                if(response.status){
+                    location.reload()
+                    Swal(
+                    'Removed!',
+                    'Item  removed.',
+                    'success').then(()=>{
+                         location.reload()
+                        
+                    })
+              //alert("product Remove from cart")
+               
+
+                }else{
+                   
+                 console.log(response)
+                    document.getElementById(proId).innerHTML=quantity+count
+                      document.getElementById('total').innerHTML=response.total
+                       document.getElementById('subtotals' + proId).innerHTML = response.subtotals
+                }
+            }
+
+       
+        })
+    }
+</script>
+
+
+<script>
+function removeCart(proId){
+   
+  //  var x=confirm("are you sure")
+  
+   // if(x){
+    swal({
+  title: "Are you sure?",
+  text: "Once deleted, you will not be able to recover this Product!",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+})
+.then((willDelete) => {
+  if (willDelete) {
+     $.ajax({
+    url:'/removefromcart/'+proId,
+    method:'get',
+    success:(response)=>{
+      if(response.status){
+        //location.reload()
+        let count=$('#cart-count').html()
+        count = parseInt(count)-1
+        $("#cart-count").html(count)
+        
+
+        location.reload()
+      }
+    }
+  })
+    swal("Poof! Your imaginary file has been deleted!", {
+      icon: "success",
+    });
+  } else {
+    swal("Your imaginary file is safe!");
+  }
+});
+
+ 
+//}
+}
+
+</script>
+
+
+
+
+

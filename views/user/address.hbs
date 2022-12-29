@@ -1,0 +1,112 @@
+
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/login/fonts/icomoon/style.css">
+
+    <link rel="stylesheet" href="/login/css/owl.carousel.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/login/css/bootstrap.min.css">
+    
+    <!-- Style -->
+    <link rel="stylesheet" href="/login/css/style.css">
+
+
+
+<style>
+    .error {
+        color: red;
+    }
+</style>
+
+<div class="d-lg-flex half">
+    <div class="bg order-1 order-md-2" style="background-image: url('/login/images/ethan.jpg');"></div>
+    <div class="contents order-2 order-md-1">
+
+      <div class="container">
+        <div class="row align-items-center justify-content-center">
+          <div class="col-md-7">
+            <h3 style="color: black;"><strong>BILLING DETAILS</strong></h3>
+            <br>
+            <form action="/address" method="post" id="submit-address" >
+			<input type="text" id="ID" name="id" value="" hidden>
+              <div class="form-group first">
+                <label for="username">House Name</label>
+                <input type="text"  name="homeaddress" class="form-control" placeholder="Enter House Name." id="housename" required>
+              </div>
+              <div class="form-group last mb-3">
+                <label for="">Street Address</label>
+                <input type="text" name="fullAddress" class="form-control" placeholder="Enter Street Address" id="address" required>
+              </div>
+              <div class="form-group last mb-3">
+                <label for="">Town/City</label>
+                <input type="text"  name="town" class="form-control" placeholder="Enter Town/City" id="town" required>
+              </div>
+			  <div class="form-group last mb-3">
+                <label for="">Country / State</label>
+                <input type="text"  name="country" class="form-control" placeholder="Enter Country/State" id="country" required>
+              </div>
+               <div class="form-group last mb-3">
+                <label for="">PIN Code</label>
+                <input type="number"  name="pincode" class="form-control" placeholder="Enter Pincode" id="pincode" required>
+              </div>
+            <div class="form-group last mb-3">
+                <label for="">Mobile Number</label>
+                <input type="number"  name="phone" class="form-control" placeholder="Enter Mobile number" id="phone" required>
+              </div>
+
+            <div class="form-group last mb-3">
+                        <input type="text" name="userId" value="{{user._id}}" hidden>
+            </div>
+
+              <button type="submit" class="btn btn-block btn-primary">ADD ADDRESS</button>
+              <br>
+             
+
+            </form>
+			 
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+  </div>
+
+
+
+<script>
+    let uniqueId = new Date()
+    document.getElementById('ID').value = uniqueId
+</script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+
+<script>
+    jQuery('#submit-address').validate({
+        rules: {
+            phone: {
+                minlength: 10,
+                maxlength: 10,
+            },
+            pincode: {
+                minlength: 6,
+                maxlength: 6,
+
+            }
+        }
+    });
+
+    
+</script>
+
+<script src="/login/js/jquery-3.3.1.min.js"></script>
+<script src="/login/js/popper.min.js"></script>
+<script src="/login/js/bootstrap.min.js"></script>
+<script src="/login/js/main.js"></script>
+
+
+
+

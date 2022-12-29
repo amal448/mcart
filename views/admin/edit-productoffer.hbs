@@ -1,0 +1,49 @@
+<section>
+	<div class="container mt-4">
+	
+
+		<form action="/admin/edit-productoffer" method="POST" enctype="multipart/form-data">
+
+			<div class="row d-flex justify-content-center " style="width: 100%">
+
+                  
+            		<div class="col col-5 col-lg-5 col-md-12 col-sm-12 p-3 border shadow mr-3">
+                  <div class="row">
+                                <h2 class="text-align centre ">EDIT PRODUCT OFFER</h2>
+                    <label class="mt-3" for="product">PRODUCT</label>
+
+                  </div>
+                     <input type="text" value="{{proOfferDetails._id}}" name="id" hidden >     
+					<select name="product" id="category">
+						{{#each product}}
+						<option value="{{this.Name}}">{{this.Name}}</option>
+						{{/each}}
+						{{!-- <option value="{{this.Name}}" >ddd</option> --}}
+					</select><br><br><br>
+					<label for="starting">Starting Date</label>
+					<input type="date" name="starting" id="startDate"class="form-control" value="{{proOfferDetails.starting}}" required>
+
+
+					<label for="expiry">Expiring Date</label>
+					<input type="date" id="endDate" name="expiry" class="form-control" value="{{proOfferDetails.expiry}}"  required>
+
+					<label for="catOfferPercentage">Offer</label>
+					<input type="number" name="productOfferPercentage" onkeyup="validatePercentage()" value="{{proOfferDetails.productOfferPercentage}}" class="form-control" id="offer">
+                   
+          <div id="percentageError"></div>
+					
+                <button type="submit" class="btn btn-success mt-4 ml-5">ADD PRODUCT OFFER</button>
+			<br>
+				</div>
+			
+			</div>
+
+			
+</form>
+
+	</div>
+
+	
+	</div>
+
+</section>

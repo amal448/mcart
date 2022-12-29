@@ -1,0 +1,185 @@
+
+<!-- Shop Cart Section Begin -->
+{{#if wishCount}}
+
+<section class="shop-cart spad">
+    <div class="container">
+       
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="shop__cart__table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Remove</th>
+                                {{!-- <th>Quantity</th> --}}
+                                {{!-- <th>SubTotal</th> --}}
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each product}}
+                            <tr>
+                              
+ 
+                                <td class="cart__product__item">
+                                    <img style="width:100px ; height: 100px;"
+                                        src="/product-images/{{this.product._id}}.jpg" alt="">
+                                    <div class="cart__product__item__title">
+                                        <h6>{{this.product.Name}}</h6>
+                                        <div class="rating">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                    </div>
+                                   
+
+                                </td>
+                                <td class="cart__price">{{this.product.price}}</td>
+                                <td ><button  onclick="removeCart('{{this.product._id}}')"><span class="icon_close"></span></button></td>
+                                
+                                
+                                
+                            </tr>
+                            {{/each}}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="cart__btn">
+                    <a href="/">Continue Shopping</a>
+                </div>
+            </div>
+           
+        </div>
+
+    </div>
+</section>
+{{else}}
+<div class="container">
+    <img style="width:100% ;height:500px ;" src="https://i.pinimg.com/originals/82/e6/4f/82e64ffa12370f75a4d4a05c3870a894.gif" alt="">
+    <h1>WishList EMPTY</h1>
+</div>
+{{/if}}
+
+<!-- Shop Cart Section End -->
+
+
+<script>
+  function changeQuantity(cartId,proId,count){
+    
+        let quantity = parseInt(document.getElementById(proId).innerHTML)
+        $.ajax({
+            url:'/change-product-quantity',
+            data:{
+                
+                cart:cartId,
+                product:proId,
+                count:count,
+                quantity:quantity
+            
+            },
+            method:'post',
+            success:(response)=>{
+              
+                        if(!response){
+                    location.reload()
+                    Swal(
+                    'Removed!',
+                    'Item  removed.',
+                    'success').then(()=>{
+                         location.reload()
+                        
+                    })
+              //alert("product Remove from cart")
+               
+
+                }else{
+                   
+                 console.log(response)
+                    document.getElementById(proId).innerHTML=quantity+count
+                      document.getElementById('total').innerHTML=response
+                     
+                }
+            }
+
+       
+        })
+    }
+</script>
+
+
+{{!-- <script>
+//function removeCart(proId){
+   
+  // var x=confirm("are you sure")
+  
+    if(x){
+    // $.ajax({
+    //url:'/removefromcart/'+proId,
+    method:'get',
+    //success:(response)=>{
+      if(response.status){
+        //location.reload()
+     //   let count=$('#cart-count').html()
+      //  count = parseInt(count)-1
+       // $("#cart-count").html(count)
+        
+
+       // location.reload()
+      }
+    }
+  })
+    }
+}
+
+
+
+</script> --}}
+
+<script>
+    function removeCart(proId){
+      swal({
+            title: "Are you sure You Want to Remove?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+                if (willDelete) {
+        $.ajax({
+            url:'/wishlist_removeproduct/'+proId,
+            method: 'get',
+            success: (response)=>{
+                console.log(response, "respons")
+                if(response.status){
+                    location.reload()
+                    let count = $('#wishList-count').html()
+                    count = parseInt(count)-1
+                    $('#wishList-count').html(count)
+            }
+            }
+        })
+         swal("Poof! Your imaginary Wish has been deleted!", {
+                        icon: "success",
+                    });
+                    } else {
+                    swal("Your imaginary Wish is safe!");
+    }
+    });
+    }
+</script>
+
+
+
+
+

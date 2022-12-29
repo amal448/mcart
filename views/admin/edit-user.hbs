@@ -1,0 +1,35 @@
+<style>
+    .body{display: flex; justify-content: center; align-items: center;
+     }
+    
+</style>
+<div class="container-fluid body">
+    <div class="row">
+<div class="col-md-6 main">
+                      
+            <form action="/admin/edit-user/{{user._id}}" method="post">
+                {{#if signupErr}}
+                   <p class="error">{{signupErr}}</p>
+            {{/if}}      
+            <h1>Edit user</h1>
+                              
+            <input class="box" type="text" name="name" id="name" value="{{user.name}}" 
+            placeholder="Name"  required /><br>
+                              
+            <input class="box" type="email" name="email" id="email" value="{{user.email}}"
+            placeholder="E-Mail " required /><br>
+                              
+            <input class="box" type="password" name="password" id="password" value="{{user.password}}" placeholder="Password " required /><br>
+                <br>
+                
+            <input class="box" type="text" name="phone" id="phone"  value="{{user.phone}}"
+            placeholder="Phone Number " required/><br>
+                        <br>
+            <input type="submit" id="submitDetails"  
+            name="submitDetails" value="Submit" /><br>
+                      
+            </form>
+                      
+        </div>
+</div>
+</div>

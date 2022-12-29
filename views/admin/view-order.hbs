@@ -1,0 +1,140 @@
+ <!-- Favicon -->
+  <link href="/assets/img/brand/favicon.png" rel="icon" type="image/png">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+  <!-- Icons -->
+  <link href="/assets/js/plugins/nucleo/css/nucleo.css" rel="stylesheet" />
+  <link href="/assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link href="/assets/css/argon-dashboard.css?v=1.1.2" rel="stylesheet" />
+
+
+
+<div class="container-fluid mt-7">
+  
+
+    <div class="row">
+        <div class="col">
+          <div class="card shadow">
+            <div class="card-header border-0">
+              <h3 class="mb-0">Your Orders</h3>
+            </div>
+            <div class="table-responsive">
+            
+              <table class="table align-items-center table-flush">
+                <thead>
+                            <tr>          
+                              <th scope="col">No</th>                
+                                <th scope="col">Order ID</th>
+                                 <th scope="col">Name</th> 
+                                <th scope="col">Shipping Address</th>
+                                <th scope="col">Total Amount</th>
+                                <th scope="col">Payment</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">OrderDetails</th>
+                                <th scope="col">Save</th>
+
+
+                            </tr>
+                      </thead>
+                        <tbody>
+                            {{#each orderList}}
+                            <tr>
+                                <form action="/admin/edit-status/{{this._id}}" method="post">
+                                <th>{{inc @index}}</th>
+                                <th>{{this._id}}</th>
+                                 {{!-- <th>{{this.OrderDetail.name}}</th> --}}
+
+                                  <td><a class="btn btn-success" href="/admin/view-details/{{this._id}}">View</a>
+                                                              
+                                <td>
+                                    {{this.deliveryDetails.homeaddress}}<br>
+                                    {{this.deliveryDetails.fullAddress}}<br>
+                                    {{this.deliveryDetails.town}}<br>
+                                    {{this.deliveryDetails.Country}}<br> 
+                                    {{this.deliveryDitails.pincode}}
+
+                                </td>
+                                <td>{{this.totalAmount}}</td>
+                                <td>{{this.paymentMethod}}</td>
+                                <td>{{this.status}}</td>
+                                <td>
+                                    <select class="" name="status" id="status">
+                                            <option value="">{{this.status}}</option>
+                                            <option value="cancelled">cancelled</option>
+                                            <option value="delivered">delivered</option>
+                                            <option value="shipped">shipped</option>
+                                            <option value="placed">placed</option>
+                                        </select>
+                                </td>
+                                {{#if this.cancelled}}
+                                    <td style="color: red;">{{this.status}}</td>
+                                    {{else if this.delivered}}
+                                    <td style="color: green;">{{this.status}}</td>
+                                    {{else if this.returned}}
+                                    <td style="color: rgb(117, 128, 0);">{{this.status}}</td>
+                                    {{else}}
+                                    <td><button type="submit" class="btn btn-success" style="background-color: rgb(95, 13, 13); border-radius:10px ; padding-left:25px ;padding-right: 25px;">Save status</button></td>
+                                    {{/if}}
+                                </form>
+                            </tr>
+                            {{/each}}
+                        </tbody> 
+                
+              </table>
+            </div>
+            <div class="text-center mt-3">
+            {{#if orderList.length}}
+          <button onclick="paginatePrevious()" class="btn btn-primary"><</button>
+              <span>Page <span id="pageInfo">{{passNo}}</span></span>
+            
+            <button onclick="paginateNext({{orderList.length}})" class="btn btn-primary">></button>
+            {{/if}}
+        </div>
+          </div>
+        </div>
+      </div> 
+
+            <script src="/assets/js/plugins/jquery/dist/jquery.min.js"></script>
+            <script src="/assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+            <!--   Optional JS   -->
+            <script src="/assets/js/plugins/chart.js/dist/Chart.min.js"></script>
+            <script src="/assets/js/plugins/chart.js/dist/Chart.extension.js"></script>
+            <!--   Argon JS   -->
+            <script src="/assets/js/argon-dashboard.min.js?v=1.1.2"></script>
+            <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS &&
+      TrackJS.install({
+        token: "ee6fab19c5a04ac1a32a645abde4613a",
+        application: "argon-dashboard-free"
+      });
+  </script>
+ 
+
+    <script>
+
+          function paginatePrevious() {
+            let page = document.getElementById('pageInfo').innerHTML
+            page = Number(page) - 1
+            if (page) {
+              window.location.href = `/admin/view-order/${page}`
+            } else {
+              return false
+            }
+          }
+          function paginateNext(limit) {
+            if(limit!=10)
+            return false
+            let page = document.getElementById('pageInfo').innerHTML
+            page = Number(page) + 1
+            if (page) {
+              window.location.href = `/admin/view-order/${page}`
+            } else {
+              return false
+            }
+          }
+
+        </script>
+
+

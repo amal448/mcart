@@ -1,0 +1,176 @@
+<!-- Favicon -->
+<link href="/assets/img/brand/favicon.png" rel="icon" type="image/png">
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+<!-- Icons -->
+<link href="/assets/js/plugins/nucleo/css/nucleo.css" rel="stylesheet" />
+<link href="/assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
+<!-- CSS Files -->
+<link href="/assets/css/argon-dashboard.css?v=1.1.2" rel="stylesheet" />
+
+
+
+<div class="container-fluid mt-7">
+
+
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header border-0">
+          <h3 class="mb-0">Sales Report</h3>
+        </div>
+        <div class="table-responsive">
+
+          <table class="table align-items-center table-flush" id="orderTable">
+            <thead>
+              <tr>
+
+                <th scope="col">DATE</th>
+                <th scope="col">STATUS</th>
+                <th scope="col">SHIPPING ADDRESS</th>
+                <th scope="col">TOTAL AMOUNT</th>
+                <th scope="col">PAYMENT MODE</th>
+                <th scope="col">ORDERDETAILS</th>
+
+                {{!-- <th>Order ID</th>
+                <th>Shipping Address</th>
+                <th>Total Amount</th>
+                <th>Payment mode</th>
+                <th>Status</th>
+                <th>OrderDetails</th>
+                <th>Save</th> --}}
+
+              </tr>
+            </thead>
+            <tbody>
+              {{#each myorder}}
+              <tr>
+                {{!-- <form action="/admin/edit-status/{{this._id}}" method="post"> --}}
+                  <form action="/admin/view-details/{{this._id}}" method="get">
+
+                    <th>{{this.date}}</th>
+                    <td>{{this.status}}</td>
+                    <td>
+                      {{this.deliveryDetails.homeaddress}}<br>
+                      {{this.deliveryDetails.fullAddress}}<br>
+                      {{this.deliveryDetails.town}}<br>
+                      {{this.deliveryDetails.Country}}<br>
+                      {{this.deliveryDetails.pincode}}
+
+                    </td>
+                    <td>{{this.totalAmount}}</td>
+                    <td>{{this.paymentMethod}}</td>
+                    <td><button class="btn btn-primary"> view Details</button></td>
+                    {{!-- <td>
+                      <select class="" name="status" id="status">
+                        <option value="">{{this.status}}</option>
+                        <option value="cancelled">cancelled</option>
+                        <option value="delivered">delivered</option>
+                        <option value="shipped">shipped</option>
+                        <option value="placed">placed</option>
+                      </select>
+                    </td>
+                    {{#if this.cancelled}}
+                    <td style="color: red;">{{this.status}}</td>
+                    {{else if this.delivered}}
+                    <td style="color: green;">{{this.status}}</td>
+                    {{else if this.returned}}
+                    <td style="color: rgb(117, 128, 0);">{{this.status}}</td>
+                    {{else}}
+                    <td><button type="submit" class="btn btn-success"
+                        style="background-color: rgb(95, 13, 13); border-radius:10px ; padding-left:25px ;padding-right: 25px;">Save
+                        status</button></td>
+                    {{/if}} --}}
+                  </form>
+              </tr>
+              {{/each}}
+            </tbody>
+
+          </table>
+        </div>
+        <div class="text-center mt-3">
+          {{#if orderList.length}}
+          <button onclick="paginatePrevious()" class="btn btn-primary">
+            <</button>
+              <span>Page <span id="pageInfo">{{passNo}}</span></span>
+
+              <button onclick="paginateNext()" class="btn btn-primary">></button>
+              {{/if}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script src="/assets/js/plugins/jquery/dist/jquery.min.js"></script>
+  <script src="/assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <!--   Optional JS   -->
+  <script src="/assets/js/plugins/chart.js/dist/Chart.min.js"></script>
+  <script src="/assets/js/plugins/chart.js/dist/Chart.extension.js"></script>
+  <!--   Argon JS   -->
+  <script src="/assets/js/argon-dashboard.min.js?v=1.1.2"></script>
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS &&
+      TrackJS.install({
+        token: "ee6fab19c5a04ac1a32a645abde4613a",
+        application: "argon-dashboard-free"
+      });
+  </script>
+  
+
+
+
+
+{{!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> --}}
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+
+<style>
+  tfoot input {
+        width: 100%;
+        padding: 3px;
+        box-sizing: border-box;
+    }
+</style>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
+ </script>
+
+ <script>
+  $(document).ready(function () {
+    // Setup - add a text input to each footer cell
+    $('#orderTable tfoot th').each(function () {
+        var title = $(this).text();
+        $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+    });
+ 
+    // DataTable
+    var table = $('#orderTable').DataTable({
+      dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
+        initComplete: function () {
+            // Apply the search
+            this.api()
+                .columns()
+                .every(function () {
+                    var that = this;
+ 
+                    $('input', this.footer()).on('keyup change clear', function () {
+                        if (that.search() !== this.value) {
+                            that.search(this.value).draw();
+                        }
+                    });
+                });
+        },
+    });
+});
+</script>

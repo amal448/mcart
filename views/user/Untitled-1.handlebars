@@ -1,0 +1,488 @@
+<!-- chek out -->
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!-- Css Styles -->
+<link rel="stylesheet" href="/head/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="/head/css/font-awesome.min.css" type="text/css">
+<link rel="stylesheet" href="/head/css/elegant-icons.css" type="text/css">
+<link rel="stylesheet" href="/head/css/jquery-ui.min.css" type="text/css">
+<link rel="stylesheet" href="/head/css/magnific-popup.css" type="text/css">
+<link rel="stylesheet" href="/head/css/owl.carousel.min.css" type="text/css">
+<link rel="stylesheet" href="/head/css/slicknav.min.css" type="text/css">
+<link rel="stylesheet" href="/head/css/style.css" type="text/css">
+
+
+<section class="checkout spad">
+    <div class="container-fluid ">
+        <div class="col-lg-12">
+            <h6 class="coupon__link"><span class="icon_tag_alt"></span> <a href="#">Have a coupon?</a> Click
+                here to enter your code.</h6>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6" >
+                 <b>BILLING DETAILS</b>
+                     {{#each alladdress}}
+                    <div class="custom-control custom-checkbox me-sm-2 border" style="margin: 20px;">
+                        <input type="radio" class="custom-control-input" required
+                            onclick="selectAddress('{{this.homeaddress}}','{{this.fullAddress}}','{{this.town}}','{{this.country}}','{{this.pincode}}','{{this.phone}}')"
+                            value="{{this._id}}" name="address" id="{{@index}}">
+                        <label class="custom-control-label"
+                            for="{{@index}}">{{this.homeaddress}}<br>{{this.fullAddress}},{{this.town}},<br>{{this.country}},{{this.pincode}},{{this.phone}}</label>
+
+                        
+                    </div>
+                       {{/each}}
+           
+                <div style="text-align: center;">
+                       <a href="/address"> <button type="submit" class="site-btn" style="height: 43px; pad">ADD ADDRESS</button></a>
+
+                    </div>
+            </div>
+            <div class="col-md-6 ">
+                <div class="discount__content">
+                    <h6>Discount codes</h6>
+                     <form action=" "> 
+                         {{!-- <div class="mt-3" style="border: solid 1px;border-radius: 69px;width: 326px;"> --}}
+
+                            <input type="text" style="margin-left: 15px;" placeholder="Enter coupon code" id="coupon">
+                            <button onclick="couponApply()"type="submit" class="site-btn"
+                                style="height: 43px;padding-left: 33px;">Apply</button>
+
+                    {{!-- <div class="input-group-append">
+                            <button onclick="couponApply()" class="btn btn-outline-primary-2" type="submit">
+                                <span class="btn-text w-40"><i class="fa fa-light fa-arrow-right-long"></i></span>
+                                <span class="btn-hover-text">Apply coupon</span>
+                            </button>
+                        </div> --}}
+                        <!-- .End .input-group-append -->
+
+
+
+
+                        {{!-- </div>  --}}
+                    
+                    </form> 
+                </div>
+                <form action="/place-order" method="post" class="checkout__form m-" id="checkout-form">
+               
+                 
+                    <input type="text" id="ID" name="id" value="" hidden>
+                    <div class="checkout__form__input">
+                        {{!-- <p>House Name <span>*</span></p> --}}
+
+                        <input type="text" placeholder="Enter House Name " id="housename" name="homeaddress" required hidden>
+                    </div>
+
+                    <div class="checkout__form__input">
+                        {{!-- <p>Address <span>*</span></p> --}}
+                        <input type="text" placeholder="Enter Street Address " id="address" name="fullAddress" required hidden>
+                    </div>
+                    <div class="checkout__form__input">
+                        {{!-- <p>Town/City <span>*</span></p> --}}
+                        <input type="text" placeholder=" Enter Town/City " id="town" name="town" required hidden> 
+                    </div>
+                    <div class="checkout__form__input">
+                        {{!-- <p>Country/State <span>*</span></p> --}}
+                        <input type="text" placeholder=" Enter Country/State " id="country" name="country" required hidden>
+                    </div>
+                    <div class="checkout__form__input">
+                        {{!-- <p>PIN CODE <span>*</span></p> --}}
+                        <input type="number" placeholder=" Enter PIN CODE " id="pincode" name="pincode" required hidden>
+                    </div>
+                    <div class="checkout__form__input">
+                        {{!-- <p>Mobil Number <span>*</span></p> --}}
+                        <input type="number" placeholder=" Enter Mobil Number " id="phone" name="phone" required hidden>
+                    </div>
+                    <div class="checkout__form__input">
+                        <input type="text" name="userId" value="{{user}}" hidden>
+                    </div>
+                    <div class="checkout__order" style="margin-top:50px ;">
+
+
+
+                        <h5>Your order</h5>
+                        <div class="checkout__order__product">
+
+                            <ul>
+                                <li>
+                                    <div class="d-flex justify-content-between">
+                                        {{!-- <span class="top__text">Product</span> --}}
+                                        {{!-- <span class="top__text__right">Price</span> --}}
+
+
+
+                                        <span class="top__text ">Product</span>
+                                        <span class="top__text">Quantity</span>
+                                        <span class="top__text">Price</span>
+                                    </div>
+
+
+                                </li>
+                                {{#each cartsProducts}}
+                                {{!-- <li><span id="total">pp{{total}}||</span></li> --}}
+                                <li>
+                                    <div class="d-flex justify-content-between">
+                                        <span>{{this.product.Name}} </span>
+                                        <span>{{this.quantity}} </span>
+                                        <span>{{this.product.price}}</span>
+                                    </div>
+                                </li>
+
+                                {{!-- <li>{{this.product.Name}}
+                                    <span>{{this.quantity}}</span><span>{{this.product.price}}</span>
+                                </li> --}}
+                                {{/each}}
+                            </ul>
+
+                        </div>
+                        
+                        <div class="checkout__order__total">
+                            <ul>
+                                {{!-- <li>Subtotal <span>$ 750.0</span></li> --}}
+                               
+                                <li id="total">{{total}}><span></span></li>
+                                <li>Total1 <span id="discount">0</span></li>
+                         
+                          {{!-- <li>Sub Total <span id="subtotal">₹{{total}}</span></li>
+                                <li>Discount <span id="discount">₹0</span></li> --}}
+                                {{!-- {{#if product.categoryOffer}}
+                                <span>₹{{product.categoryOffer}}</span>
+                                {{else}} --}}
+                         {{!-- ` <li>Total <span id="total">₹{{total}}</span></li> --}}
+                            </ul>
+                                
+                                
+                        </div>
+                        <input type="text" name="total" class="d-none" value="{{total}}" id="total">
+                        <div class="checkout__order__widget">
+                            {{!-- <form action="#"> --}}
+                                <input type="radio" name="payment-method" value="COD" required> CASH ONE
+                                DELIVERY<label for="html"></label> <img
+                                        style="width:30px ;height:30px ; margin-left: 17vw; ;"
+                                        src="https://cdn-icons-png.flaticon.com/512/4766/4766928.png" alt="">
+                                </div><br><br>
+                                <div style="display: flex;">
+                                    <input type="radio" name="payment-method" value="razorpay" onclick="toggle()"
+                                        required>Razorpay
+                                    <label for="html"></label> <img style="width:30px ;height:30px ; margin-left: 11vw; " src="/head/img/payment/payment-4.png" alt=""><img style="width:30px ;height:30px ; margin-left: 4vw; "  src="/head/img/payment/payment-2.png" alt=""><img style="width:30px ;height:30px ; margin-left: 4vw; "  src="/head/img/payment/payment-3.png" alt="">
+
+                                </div><br><br>
+                                <div style="display: flex;">
+                                    <input type="radio" name="payment-method" value="paypal" onclick="toggle1()"
+                                        required> paypal
+                                    <label for="css"></label><img  style="width:30px ;height:30px ; margin-left: 2vw; " src="/head/img/payment/payment-1.png" alt=""><img  style="width:30px ;height:30px ; margin-left: 3vw; " src="/head/img/payment/payment-5.png" alt="">
+                                    <img style="width:30px ;height:30px ; margin-left: 3vw; " src="/head/img/payment/payment-4.png" alt=""><img style="width:30px ;height:30px ; margin-left: 4vw; "  src="/head/img/payment/payment-2.png" alt=""><img style="width:30px ;height:30px ; margin-left: 4vw; "  src="/head/img/payment/payment-3.png" alt="">
+                    
+                                </div><br><br>
+                                 {{#if wallet}}
+                                <div style="display: flex;">
+                                    <input type="radio" name="payment-method" value="wallet" required> wallet
+                                    <label for="css"></label>
+
+                                </div>
+                                {{/if}}
+
+                                {{!-- <input type="radio" name="payment-method" value="online" required>Razorpay
+                                <label for="html"></label><br> --}}
+                                {{!-- <input type="radio" name="payment-method" value="CSS"> ONLINE PAYMENT
+                                <label for="css"></label><br> --}}
+
+
+                                {{!--
+                            </form> --}}
+                        </div>
+                        <button type="submit" class="site-btn">Place order</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+</section>
+<script>
+    let uniqueId = new Date()
+    document.getElementById('ID').value = uniqueId
+</script>
+
+
+
+
+
+
+
+<!-- Checkout Section End -->
+<script>
+
+    function selectAddress(houseaddress, address, town, country, pincode, phone) {
+        document.getElementById('housename').value = houseaddress
+        document.getElementById('address').value = address
+        document.getElementById('town').value = town
+        document.getElementById('country').value = country
+        document.getElementById('pincode').value = pincode
+        document.getElementById('phone').value = phone
+
+    }
+
+</script>
+
+
+<script src="/head/js/jquery-3.3.1.min.js"></script>
+<script src="/head/js/bootstrap.min.js"></script>
+<script src="/head/js/jquery.magnific-popup.min.js"></script>
+<script src="/head/js/jquery-ui.min.js"></script>
+<script src="/head/js/mixitup.min.js"></script>
+<script src="/head/js/jquery.countdown.min.js"></script>
+<script src="/head/js/jquery.slicknav.js"></script>
+<script src="/head/js/owl.carousel.min.js"></script>
+<script src="/head/js/jquery.nicescroll.min.js"></script>
+<script src="/head/js/main.js"></script>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<!-- check out close -->
+{{!-- <script>
+    $("#checkout-form").submit((e) => {
+        e.preventDefault()  //
+        $.ajax({
+            url: "/place-order",
+            method: 'post',
+            data: $('#checkout-form').serialize(),
+            success: (response) => {
+                alert("order placed")
+                if (response.status) {
+                    location.href = '/payment-success'
+                }else if (response.paypal) {
+
+                    location.href = response.link
+
+                } else if (response.result) {
+                    location.href = '/payment-success'
+                } else {
+                    razorpayPayment(response)
+                }
+
+            }
+        })
+    })
+     function razorpayPayment(order) {
+        var options = {
+            "key": "rzp_test_5kxtiHqzDh1ydC", // Enter the Key ID generated from the Dashboard
+            "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            "currency": "INR",
+            "name": "MCart",
+            "description": "Test Transaction",
+            "image": "https://example.com/your_logo",
+            "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+            "handler": function (response) {
+
+                verifyPayment(response, order)
+            },
+            "prefill": {
+                "name": "Gaurav Kumar",
+                "email": "gaurav.kumar@example.com",
+                "contact": "9999999999"
+            },
+            "notes": {
+                "address": "Razorpay Corporate Office"
+            },
+            "theme": {
+                "color": "#3399cc"
+            }
+        };
+        var rzp1 = new Razorpay(options);
+        rzp1.open();
+    }
+      function verifyPayment(payment, order) {
+        $.ajax({
+            url: '/verify-payment',
+            method: 'post',
+            data: {
+                payment,
+                order
+            },
+            success: (response) => {
+                console.log(response, 'iii')
+                if (response.status) {
+                    location.href = '/payment-success'
+                } else {
+                    alert('payment failed')
+                }
+            }
+        })
+    }
+    function toggle() {
+        const list = document.getElementById("placeorder").classList;
+        const list2 = document.getElementById("paypal-button-container").classList;
+        list.add("sft");
+        list2.remove("sft");
+
+    }
+    function toggle1() {
+        const list = document.getElementById("placeorder").classList;
+        const list2 = document.getElementById("paypal-button-container").classList;
+        list2.add("sft");
+        list.remove("sft");
+    }
+
+
+
+</script> --}}
+<script>
+    $("#checkout-form").submit((e) => {
+        e.preventDefault()  //
+        $.ajax({
+            url: "/place-order",
+            method: 'post',
+            data: $('#checkout-form').serialize(),
+            success: (response) => {
+                if (response.codStatus) {
+                    location.href = '/payment-success'
+                } else if (response.paypal) {
+
+                    location.href = response.link
+
+                } else if (response.result) {
+                    location.href = '/payment-success'
+                } else {
+                    razorpayPayment(response)
+                }
+            }
+        })
+    })
+
+    function razorpayPayment(order) {
+        var options = {
+            "key": "rzp_test_5kxtiHqzDh1ydC", // Enter the Key ID generated from the Dashboard
+            "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            "currency": "INR",
+            "name": "MCart",
+            "description": "Test Transaction",
+            "image": "https://example.com/your_logo",
+            "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+            "handler": function (response) {
+
+                verifyPayment(response, order)
+            },
+            "prefill": {
+                "name": "Gaurav Kumar",
+                "email": "gaurav.kumar@example.com",
+                "contact": "9999999999"
+            },
+            "notes": {
+                "address": "Razorpay Corporate Office"
+            },
+            "theme": {
+                "color": "#3399cc"
+            }
+        };
+        var rzp1 = new Razorpay(options);
+        rzp1.open();
+    }
+
+    function verifyPayment(payment, order) {
+        $.ajax({
+            url: '/verify-payment',
+            method: 'post',
+            data: {
+                payment,
+                order
+            },
+            success: (response) => {
+                console.log(response, 'iii')
+                    location.href = '/payment-success'
+                //if (response.status) {
+                //} else {
+                //}
+            }
+        })
+    }
+
+    function toggle() {
+        const list = document.getElementById("placeorder").classList;
+        const list2 = document.getElementById("paypal-button-container").classList;
+        list.add("sft");
+        list2.remove("sft");
+
+    }
+    function toggle1() {
+        const list = document.getElementById("placeorder").classList;
+        const list2 = document.getElementById("paypal-button-container").classList;
+        list2.add("sft");
+        list.remove("sft");
+    }
+
+////////////COUPON AJAX////////////////// 
+
+
+
+
+
+
+
+function couponApply() {
+        console.log("entered")
+        let couponCode = document.getElementById('coupon').value
+        $.ajax({
+            url: '/coupon-apply',
+            data: {
+                coupon: couponCode,
+            },
+            method: 'post',
+            success: (response) => {
+                console.log(response)
+                if (response.couponSuccess) {
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Coupon Applied Successfully",
+                        showConfirmButton: false,
+                        timer: 1000,
+                    });
+
+                    document.getElementById('total').innerHTML = response.total                    
+                    document.getElementById('discount').innerHTML = response.discountValue
+                    document.getElementById('couponName').value = response.couponCode
+
+                } else if (response.couponUsed) {
+                    Swal.fire({
+                        position: "center",
+                        icon: "warning",
+                        title: "You have Already Used This Coupon",
+                        showConfirmButton: false,
+                        timer: 1000,
+                    });
+
+                } else if (response.couponExpired) {
+                    Swal.fire({
+                        position: "center",
+                        icon: "warning",
+                        title: "Entered Coupon Expired",
+                        showConfirmButton: false,
+                        timer: 1000,
+                    });
+                } else {
+                    Swal.fire({
+                        position: "center",
+                        icon: "warning",
+                        title: "Invalid Coupon",
+                        showConfirmButton: false,
+                        timer: 1000,
+                    });
+                }
+            }
+        })
+    }
+    </script>

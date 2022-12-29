@@ -1,0 +1,141 @@
+
+  <!-- Favicon -->
+  <link href="/assets/img/brand/favicon.png" rel="icon" type="image/png">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+  <!-- Icons -->
+  <link href="/assets/js/plugins/nucleo/css/nucleo.css" rel="stylesheet" />
+  <link href="/assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link href="/assets/css/argon-dashboard.css?v=1.1.2" rel="stylesheet" />
+
+
+  <div class="container-fluid mt-7">
+      <!-- Table -->
+      <div class="row">
+        <div class="col">
+          <div class="card shadow">
+            {{!-- <div class="card-header border-0"> --}}
+              
+              <h3 class="mb-0 mx-5 mt-5">Category Details</h3>
+              <div class="d-flex justify-content-end"> 
+              <div class="card-header border-0 d-flex justify-content-end ">
+              <a href="/admin/add-category" class="btn btn-success ml-auto">Add Category</a>
+            </div>
+             <div class="card-header border-0 d-flex justify-content-end ">
+              <a href="/admin/add-categoryoffer" class="btn btn-success ml-auto">Add Category Offer</a>
+            </div>
+              </div>
+            {{!-- </div> --}}
+            <div class="table-responsive">
+              <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">No</th>
+                    <th scope="col"> Category Name</th>                 
+                    <th scope="col">EDIT</th>
+                    <th scope="col">DELETE</th>
+                  </tr>
+                </thead>
+                <tbody>
+                 
+                  {{#each category}}
+                  <tr>
+                    <td>
+                       {{inc @index}}
+                    </td>
+                    <!-- <th scope="row">
+                      <div class="media align-items-center">
+                        <a href="#" class="avatar rounded-circle mr-3">
+                          <img alt="Image placeholder" src="../assets/img/theme/bootstrap.jpg">
+                        </a>
+                        <div class="media-body">
+                          <span class="mb-0 text-sm"></span>
+                        </div>
+                      </div>
+                    </th> -->
+                    <td>
+                      <span class="badge badge-dot mr-4 text-dark ">
+                        <i class="bg-warning"></i> {{this.category}}
+                      </span>
+                    </td>
+                    <!-- <td>
+                      <div class="avatar-group">
+                        <a href="#" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Ryan Tompson">
+                          <img alt="Image placeholder" src="../assets/img/theme/team-1-800x800.jpg" class="rounded-circle">
+                        </a>
+                        <a href="#" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Romina Hadid">
+                          <img alt="Image placeholder" src="../assets/img/theme/team-2-800x800.jpg" class="rounded-circle">
+                        </a>
+                        <a href="#" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Alexander Smith">
+                          <img alt="Image placeholder" src="../assets/img/theme/team-3-800x800.jpg" class="rounded-circle">
+                        </a>
+                        <a href="#" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Jessica Doe">
+                          <img alt="Image placeholder" src="../assets/img/theme/team-4-800x800.jpg" class="rounded-circle">
+                        </a>
+                      </div>
+                    </td> -->
+                    
+                    <td>
+                      <a href="/admin/edit-categoryoffer/{{this._id}}" class="btn btn-primary">Edit</a>
+                      <td>
+                        
+                        <a href="/admin/delete-category/{{this._id}}" class="btn btn-danger"  onclick="return confirm('Sure you want to remove {{this.name}}')">Delete</a>
+                      </td>
+                  </tr>
+                  {{/each}}
+                </tbody>  
+              </table>    
+            </div> 
+          </div>
+           
+        </div>
+         <div class="text-center mt-3">
+            {{#if category.length}}  
+          <button onclick="paginatePrevious()" class="btn btn-primary"><
+            </button>
+              <span>Page <span id="pageInfo">{{passNo}}</span></span>
+            
+            <button onclick="paginateNext()" class="btn btn-primary">></button>
+            {{/if}}
+        </div>
+      </div>
+      
+ <script src="/assets/js/plugins/jquery/dist/jquery.min.js"></script>
+            <script src="/assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+            <!--   Optional JS   -->
+            <script src="/assets/js/plugins/chart.js/dist/Chart.min.js"></script>
+            <script src="/assets/js/plugins/chart.js/dist/Chart.extension.js"></script>
+            <!--   Argon JS   -->
+            <script src="/assets/js/argon-dashboard.min.js?v=1.1.2"></script>
+            <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS &&
+      TrackJS.install({
+        token: "ee6fab19c5a04ac1a32a645abde4613a",
+        application: "argon-dashboard-free"
+      });
+  </script>
+   <script>
+
+          function paginatePrevious() {
+            let page = document.getElementById('pageInfo').innerHTML
+            page = Number(page) - 1
+            if (page) {
+              window.location.href = `/admin/view-category/${page}`
+            } else {
+              return false
+            }
+          }
+          function paginateNext() {
+            let page = document.getElementById('pageInfo').innerHTML
+            page = Number(page) + 1
+            if (page) {
+              window.location.href = `/admin/view-category/${page}`
+            } else {
+              return false
+            }
+          }
+
+        </script>
+</div>

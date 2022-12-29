@@ -1,0 +1,70 @@
+ 
+<div class="d-lg-flex half">
+    <div class="bg order-1 order-md-2" style="background-image:  url('https://images.pexels.com/photos/925263/pexels-photo-925263.jpeg?auto=compress&cs=tinysrgb&w=600');"></div>
+    <div class="contents order-2 order-md-1">
+
+      <div class="container">
+        <div class="row align-items-center justify-content-center">
+          <div class="col-md-7">
+            <h3 style="color: black;">Login to <strong>MCart</strong></h3>
+            <br>
+            <form action="/login" method="post">
+              <div class="form-group first">
+                <label for="email">Email</label>
+                <input type="email" name="email" class="form-control" placeholder="Enter Your Email." id="email" required>
+              </div>
+              <div class="form-group last mb-3">
+                <label for="password">Password</label>
+                <input type="password" name="password" class="form-control" placeholder="Your Password" id="password" required>
+              </div>
+              {{#if blockErr}}
+            <p class="error text-danger" style="color: red;text-align: center;">{{blockErr}}</p>
+            {{/if}}
+            {{#if loginErr}}
+            <p style="color: red;text-align: center;">{{loginErr}}</p>
+            {{/if}}
+              <input type="submit" value="Log In" class="btn btn-block btn-primary">
+              <br>
+              <div class="d-flex mb-5 align-items-center">
+                {{!-- <label class="control control--checkbox mb-0"><span class="caption">Remember me</span>
+                  <input type="checkbox" checked="checked"/>
+                  <div class="control__indicator"></div>
+                </label> --}}
+                <span class="ml-auto"><a href="/signup" class="forgot-pass">Create an Account..?</a></span> 
+              </div>
+
+            </form>
+            
+            <form action="/get-otp" method="post">
+              
+
+              <div class="form-group last mb-3">
+                <label for="password"><b>LOGIN WITH OTP</b></label>
+                <input type="" name="phone" class="form-control" placeholder="Enter the Number" id="otp">
+              </div>
+             {{#if otpUserBlock}}
+            <p style="color: red;text-align: center;">{{otpUserBlock}}</p>
+            {{/if}}
+            {{#if invalidUser}}
+            <p style="color: red; text-align: center">{{invalidUser}}</p>
+            {{/if}}
+              {{!-- <div class="d-flex mb-5 align-items-center">
+                <label class="control control--checkbox mb-0"><span class="caption">Remember me</span>
+                  <input type="checkbox" checked="checked"/>
+                  <div class="control__indicator"></div>
+                </label>
+                <span class="ml-auto"><a href="#" class="forgot-pass">Create an Account</a></span> 
+              </div> --}}
+
+              <input type="submit" value="Log In" class="btn btn-block btn-primary">
+
+            </form>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+  </div>

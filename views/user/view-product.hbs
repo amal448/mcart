@@ -1,0 +1,262 @@
+<link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+<!-- Css Styles -->
+<link rel="stylesheet" href="./head/css/style.css" type="text/css">
+<link rel="stylesheet" href="./head/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="./head/css/font-awesome.min.css" type="text/css">
+<link rel="stylesheet" href="./head/css/elegant-icons.css" type="text/css">
+<link rel="stylesheet" href="./head/css/jquery-ui.min.css" type="text/css">
+<link rel="stylesheet" href="./head/css/magnific-popup.css" type="text/css">
+<link rel="stylesheet" href="./head/css/owl.carousel.min.css" type="text/css">
+<link rel="stylesheet" href="./head/css/slicknav.min.css" type="text/css">
+
+
+<!-- Product Details Section Begin -->
+<section class="product-details spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="product__details__pic">
+                    <div class="product__details__pic__left product__thumb nice-scroll">
+                        <a class="pt active" href="#product-1">
+                            <img src="/product-images/{{product._id}}.jpg" alt="">
+                        </a>
+                        <a class="pt" href="#product-2">
+                            <img src="/product-images/{{product._id}}1.jpg" alt="">
+                        </a>
+                        <a class="pt" href="#product-3">
+                            <img src="/product-images/{{product._id}}2.jpg" alt="">
+                        </a>
+                        <a class="pt" href="#product-4">
+                            <img src="/product-images/{{product._id}}3.jpg" alt="">
+                        </a>
+
+                    </div>
+                    <div class="product__details__slider__content">
+                        <div class="product__details__pic__slider owl-carousel">
+                            <img data-hash="product-1" class="product__big__img zoom"
+                                src="/product-images/{{product._id}}.jpg" alt="">
+                            <img data-hash="product-2" class="product__big__img zoom"
+                                src="/product-images/{{product._id}}1.jpg" alt="">
+                            <img data-hash="product-3" class="product__big__img zoom"
+                                src="/product-images/{{product._id}}2.jpg" alt="">
+                            <img data-hash="product-4" class="product__big__img zoom"
+                                src="/product-images/{{product._id}}3.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="product__details__text">
+                    <h3>{{product.Name}}</h3>
+
+                    <div class="rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <span>( 138 reviews )</span>
+                    </div>
+                {{#if product.productOfferPercentage}}
+                    <div class="product__details__price">₹{{product.price}}
+                        <span>₹{{product.actualPrice}}</span><br>{{product.productOfferPercentage}}%off
+                         <p>{{product.description}}</p> 
+                    </div>
+                     {{else if product.catofferPercentage}}
+                    <div class="product__details__price">₹{{product.price}}
+                        <span>₹{{product.actualPrice}}</span><br>{{product.catofferPercentage}}%off 
+                         <p>{{product.description}}</p> 
+                    </div>
+                    {{else}}
+                    <div class="product__details__price">₹{{product.price}}
+
+                        {{/if}}
+                    </div>
+                    <div class="product__details__button">
+                           {{#if person}}
+                        
+                                    
+                                     <li><a onclick="addToCart('{{product._id}}')" class="cart-btn" style="margin-top: 24px"><span
+                                    class="icon_bag_alt"></span> Add to cart</a></li>
+                            {{else}}
+                    <a href="/login" class="cart-btn btn btn-danger" >Add to cartt</a>
+                                    {{/if}}
+                        
+                     {{!-- <ul> {{#if person}}
+                            <li><a onclick="addToWishlist('{{this._id}}')" class="social-info btn_prod" >
+									<span id="{{this._id}}wishList" class="icon_heart_alt "></span>
+								</a></li>
+                                {{else}}
+                                 <a href="/login" class="social-info btn_prod icon_heart_alt" style="padding: 20px;"></a>
+                                    {{/if}}    
+                       
+                            <li><a href="#"><span class="icon_adjust-horiz"></span></a></li>
+                        </ul> --}}
+                    </div>
+                    <div class="product__details__widget">
+                        <ul>
+                            <li>
+                                <span>Availability:</span>
+                                <div class="stock__checkbox">
+                                    <label for="stockin">
+                                        In Stock
+                                        <input type="checkbox" id="stockin">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </li>
+
+                            <li>
+                                <span>Available size:</span>
+                                <div class="size__btn">
+                                    <label for="xs-btn" class="active">
+                                        <input type="radio" id="xs-btn">
+                                        5
+                                    </label>
+                                    <label for="s-btn">
+                                        <input type="radio" id="s-btn">
+                                        6
+                                    </label>
+                                    <label for="m-btn">
+                                        <input type="radio" id="m-btn">
+                                        7
+                                    </label>
+                                    <label for="l-btn">
+                                        <input type="radio" id="l-btn">
+                                        8
+                                    </label>
+                                </div>
+                            </li>
+                            {{!-- <li>
+                                <span>Promotions:</span>
+                                <p>Free shipping</p>
+                            </li> --}}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- Product Details Section End -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('.zoom').imagezoomsl({
+            zoomrange: [3, 3]
+        });
+    })
+</script>
+
+<script src="./head/js/jquery-3.3.1.min.js"></script>
+<script src="./head/js/bootstrap.min.js"></script>
+<script src="./head/js/jquery.magnific-popup.min.js"></script>
+<script src="./head/js/jquery-ui.min.js"></script>
+<script src="./head/js/mixitup.min.js"></script>
+<script src="./head/js/jquery.countdown.min.js"></script>
+<script src="./head/js/jquery.slicknav.js"></script>
+<script src="./head/js/owl.carousel.min.js"></script>
+<script src="./head/js/jquery.nicescroll.min.js"></script>
+<script src="./head/js/main.js"></script>
+
+
+
+<script src="/javascripts/script.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+
+<script>
+    function addToCart(proId) {
+        $.ajax({
+            url: "/add-to-cart/" + proId,
+            method: "get",
+
+            success: (response) => {
+                if (response.status == "add") {
+                    let count = $("#cart-count").html();
+                    count = parseInt(count) + 1;
+                    $("#cart-count").html(count);
+                    Swal({
+                        icon: "success",
+                        title: "Item added to Cart",
+                        showConfirmButton: false,
+                        timer: 1000,
+                    }).then(() => {
+                        location.reload()
+
+                    })
+                } else if (response.status == "noStock") {
+                    Swal({
+                        icon: "error",
+                        title: "Oops..!",
+                        text: "Out Of Stock!",
+                        showConfirmButton: false,
+                        timer: 1000,
+                    });
+                } else if (response.status == "fewStock") {
+                    Swal({
+                        icon: "error",
+                        title: "Oops..!",
+                        text: "Out Of Stock!",
+                        showConfirmButton: false,
+                        timer: 1000,
+                    });
+                } else if (response.status == "maxLimitStock") {
+                    Swal({
+                        icon: "warning",
+                        title: "Oops..!",
+                        text: "Limit Is Reached!",
+                        showConfirmButton: false,
+                        timer: 1000,
+                    });
+                } else {
+                    location.href = "/login";
+                }
+            },
+        });
+    }
+</script>
+
+
+
+<script>
+	function addToWishlist(proId){
+    let id = proId+'wishList'
+    var btn = document.getElementById(id)
+    swal({
+                        icon: "success",
+                        title: "Item added to WishList",
+                        timer: 2000,
+                    }).then(()=>{
+                location.reload()
+                })
+    $.ajax({
+        url: '/add-to-wishlist/'+proId,
+        method: 'get',
+        success:(response)=>{
+            if(response.status){
+                console.log(response.wishlist)
+                if(response.wishlist){
+                    btn.classList.add('wish')
+                    swal({
+                        icon: "success",
+                        title: "Item added to WishList",
+                        showConfirmButton: false,
+                        timer: 1000,
+                    }).then(()=>{
+                location.reload()
+                })
+                }else{
+                    btn.classList.remove('wish')
+                }
+            }
+      }
+    })
+}
+</script>

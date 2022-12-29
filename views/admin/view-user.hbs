@@ -1,0 +1,100 @@
+<div class="row mt-5">
+  <div class="col">
+    <div class="card bg-default shadow">
+      <div class="card-header bg-transparent border-0">
+        <h3 class="text-white mb-0">USER DETAILS</h3>
+      </div>
+      <div class="table-responsive">
+        <table class="table align-items-center table-dark table-flush">
+          <thead class="thead-dark">
+            <tr>
+              {{!-- <th scope="col">No</th> --}}
+              <th scope="col">NAME</th>
+              {{!-- <th scope="col">Status</th> --}}
+              <th scope="col">EMAIL</th>
+              <th scope="col">Phone</th>
+              <th scope="col">BLOCK/UNBLOCK</th>
+            </tr>
+          </thead>
+          <tbody>
+             <script>let sno = 0</script>
+            {{#each users}}
+            <tr>
+             <td>
+                      <script>document.write(++sno)</script>
+                    </td>
+
+              <td>
+                {{this.name}}
+              </td>
+             
+              <td>
+                <span class="badge badge-dot mr-4">
+                  <i class="bg-warning"></i> {{this.email}}
+                </span>
+              </td>
+               <td>
+                {{this.phone}}
+              </td>
+              {{#if this.blocked}}
+             <td class="px-4 py-3 text-xs">
+
+                                    <span class="">
+                                        <a class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700"
+                                            href="/admin/changestatus?id={{this._id}}" role="button" onclick="return confirm('Are you sure  {{this.Name}} ?')">UNBLOCK</a>
+                                    </span>
+                                </td>
+              {{else}} 
+
+              <td class="px-4 py-3 text-sm">
+                                 <span class="">
+                                        <a class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:text-green-100 dark:bg-green-700"
+                                            href="/admin/changestatus?id={{this._id}}" role="button" onclick="return confirm('Are you sure  {{this.Name}} ?')">BLOCK</a>
+                                    </span>
+              </td>
+                {{/if}}     
+            </tr>
+           {{/each}}
+            
+            
+            
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+    <div class="text-center mt-3">
+            {{#if users.length}}
+          <button onclick="paginatePrevious()" class="btn btn-primary">
+            <</button>
+              <span>Page <span id="pageInfo">{{passNo}}</span></span>
+            
+            <button onclick="paginateNext()" class="btn btn-primary">></button>
+            {{/if}}
+        </div>
+
+</div>
+
+ <script>
+
+          function paginatePrevious() {
+            let page = document.getElementById('pageInfo').innerHTML
+            page = Number(page) - 1
+            if (page) {
+              window.location.href = `/admin/view-user/${page}`
+            } else {
+              return false
+            }
+          }
+          function paginateNext() {
+            let page = document.getElementById('pageInfo').innerHTML
+            page = Number(page) + 1
+            if (page) {
+              window.location.href = `/admin/view-user/${page}`
+            } else {
+              return false
+            }
+          }
+
+        </script>

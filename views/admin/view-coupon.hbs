@@ -1,0 +1,99 @@
+<main class="h-full pb-16 overflow-y-auto">
+    <div class="container-fluid px-6 mx-auto grid">
+
+        <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
+
+        </h2>
+        <div class="w-full overflow-hidden rounded-lg shadow-xs">
+            <div class="w-full overflow-x-auto">
+                <div class="card-header border-0">
+                    <h3 class="mb-0">COUPON</h3>
+                    <div class="d-flex justify-content-end">
+                        <div class="card-header border-0 d-flex justify-content-end ">
+                            <a href="/admin/add-coupon" class="btn btn-success ml-auto">Add Coupon</a>
+                        </div>
+                    </div>
+                    {{!-- <div class="w-full overflow-hidden rounded-lg shadow-xs">
+                        <div class="w-full overflow-x-auto"> --}}
+                             <div class="table-reponsive"> 
+
+                                 <div class="w-full overflow-x-auto"> 
+                                     <table class="table align-items-center table-flush " id="orderTable">
+                                     {{!-- <table class="w-full whitespace-no-wrap " id="orderTable"> --}}
+                                        <thead>
+                                            <tr
+                                                class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+
+                                                <th class="px-4 py-3">Coupon Code</th>
+                                                <th class="px-4 py-3">Discount</th>
+                                                <th class="px-4 py-3">Coupon Validity</th>
+                                                <th class="px-4 py-3">Delete</th>
+
+                                            </tr>
+
+                                        </thead>
+
+                                        <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+
+                                            {{#each allcoupons}}
+                                            <tr class="text-gray-700 dark:text-gray-400" style="text-align:center;">
+
+                                                <td class="px-4 py-3">
+                                                    {{this.coupon}}
+                                                </td>
+                                                <td class="px-4 py-3">
+                                                    {{this.offer}}
+                                                </td>
+                                                <td class="px-4 py-3">
+                                                    {{this.starting}} to {{this.expiry}}
+                                                </td>
+                                                <td class="px-4 py-3">
+
+                                                    <a href="/admin/delete-coupon/{{this._id}}" class="btn btn-danger"
+                                                        onclick="deleteCoupon('{{this.coupon}}')">DELETE</a>
+                                                </td>
+
+                                            </tr>
+                                            {{/each}}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+</main>
+</div>
+</div>
+
+
+
+
+{{!--
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script> --}}
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+
+
+<script>
+    function deleteCoupon(couponId){
+        $.ajax(
+        alert('Are You Sure you want to delete the Coupon?fs'+couponId),
+          { 
+            url: 'deleteCoupon',
+            method: 'delete',
+            data: {
+                couponId: couponId
+            },
+            success:(response)=>{
+                alert('Coupon deleted Succesfully!')
+                location.reload()
+            }
+        })   
+
+    }
+</script>

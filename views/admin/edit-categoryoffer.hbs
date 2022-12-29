@@ -1,0 +1,52 @@
+
+
+<section>
+	<div class="container mt-4">
+	
+
+		<form action="/admin/edit-categoryoffer" method="POST" >
+
+			<div class="row d-flex justify-content-center " style="width: 100%">
+
+                  
+            		<div class="col col-5 col-lg-5 col-md-12 col-sm-12 p-3 border shadow mr-3">
+                  <div class="row">
+                                <h2 class="text-align centre ">EDIT CATEGORY OFFER</h2>
+                    <label class="mt-3" for="product">CATEGORY</label>
+
+                  </div>
+                     <input type="text" value="{{data._id}}" name="id" hidden >     
+					<select name="category" id="category">
+						{{#each category}}
+						<option value="{{this.category}}">{{this.category}}</option>
+						{{/each}}
+						{{!-- <option value="{{this.Name}}" >ddd</option> --}}
+					</select><br><br><br>
+					
+					<label for="starting">Starting Date</label>
+					<input type="date" name="starting" id="startDate"class="form-control" value="{{data.starting}}" required>
+
+
+					<label for="expiry">Expiring Date</label>
+					<input type="date" id="endDate" name="expiry" class="form-control" value="{{data.expiry}}"  required>
+
+					<label for="catOfferPercentage">Offer</label>
+					<input type="number" name="catOfferPercentage" onkeyup="validatePercentage()" value="{{data.catOfferPercentage}}" class="form-control" id="offer">
+                   
+          <div id="percentageError"></div>
+					
+                <button type="submit" class="btn btn-success mt-4 ml-5">ADD CATEGORY OFFER</button>
+			<br>
+				</div>
+			
+			</div>
+
+			
+</form>
+
+	</div>
+
+	
+	</div>
+
+</section>

@@ -1,0 +1,55 @@
+<div class="row pt-5">
+  <div class="col">
+   
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.css"
+	integrity="sha512-+VDbDxc9zesADd49pfvz7CgsOl2xREI/7gnzcdyA9XjuTxLXrdpuz21VVIqc5HPfZji2CypSbxx1lgD7BgBK5g=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<section>
+	<div class="container mt-5">
+	
+
+		<form action="/admin/add-coupon" method="POST" enctype="multipart/form-data">
+
+			<div class="row d-flex justify-content-center " style="width: 100%">
+
+                  
+            		<div class="col col-5 col-lg-5 col-md-12 col-sm-12 p-3 border shadow mr-3">
+                  <div class="row">
+                                <h2 class="text-align centre ">ADD COUPON</h2>
+                  </div>
+                    <br> 
+					<label for="coupon">ENTER COUPON CODE</label>
+					<input type="text" name="coupon" class="form-control" placeholder="Coupon Code NAME " required/>
+                    <br>
+					<label for="discount">ENTER DISCOUNT</label>
+					<input type="text" name="offer" class="form-control"  placeholder="% Discount"required/>
+                    <br>
+					<label for="validity">VALIDITY</label>
+					<input type="date" name="starting" id="starting"class="form-control" required/>
+                    <br>
+
+					<label for="expiry">EXPIRING</label>
+					<input type="date" id="expiry" name="expiry" class="form-control" >
+
+					<br>
+                <button type="submit" class="btn btn-success mt-4 ml-2">ADD COUPON</button>
+			<br>
+				</div>
+			
+			</div>
+
+			
+
+
+	</div>
+
+	</form>
+	</div>
+
+</section>
+
+
+  </div>
+</div>
